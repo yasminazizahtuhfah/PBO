@@ -1,0 +1,32 @@
+// PostService.java
+package com.blog.service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.blog.vo.Post;
+
+@Service
+public class PostService {
+	private static List<Post> posts = new ArrayList<>(); // Inisialisasi list di sini
+	
+    public Post getPost(Integer id) {
+        if (id <= 0 || id > posts.size()) {
+            throw new IllegalArgumentException("Invalid post id");
+        }
+        
+        Post post = posts.get(id - 1); // Periksa apakah indeks ada dalam list
+        return post;
+    }
+    
+    public List<Post> getPosts() { 
+    	return posts;
+    }
+    
+    static { // Inisialisasi data awal di sini
+        posts.add(new Post(1L, "Mike", "Mike's Post", "Welcome to My blog"));
+        posts.add(new Post(2L, "Jason", "It's Jason", "Hi, My name is Jason"));
+    }
+}
